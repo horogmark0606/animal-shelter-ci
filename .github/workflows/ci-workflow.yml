@@ -12,6 +12,6 @@ jobs:
   build-job:
     runs-on: ubuntu-latest
     steps: 
-      - name: Hello
-        run: 'echo 👋 Hello ${{ github.actor }} from the GitHub Actions.'
+      - name: Checkout repository
+        uses: actions/checkout@v7
 
