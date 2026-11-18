@@ -51,3 +51,5 @@ def test_get_animals_returns_empty_list_for_unknown_habitat(client):
 
     assert response.status_code == 200
     assert response.get_json() == []
+
+    
