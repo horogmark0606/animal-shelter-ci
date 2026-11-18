@@ -6,8 +6,8 @@ on:
   pull_request:
     branches: [main]
 env:
-  DOCKER_USERNAME: 'samson84cc'
-  DOCKER_REPO: 'animal-shelter'
+  DOCKER_USERNAME: horogmark
+  DOCKER_REPO: animal-shelter-ci
 jobs:
   build-job:
     runs-on: ubuntu-latest
@@ -15,3 +15,5 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v7
 
+      - name: Build Docker image
+        run: docker build -t ${{ env.DOCKER_USERNAME }}/${{ env.DOCKER_REPO }}:${{ github.sha }} .
