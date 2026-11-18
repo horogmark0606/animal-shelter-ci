@@ -18,7 +18,7 @@ jobs:
       - name: Build Docker image
         run: docker build -t ${{ env.DOCKER_USERNAME }}/${{ env.DOCKER_REPO }}:${{ github.sha }} .
       - name: Lint
-        run: docker run --rm ${{ env.DOCKER_USERNAME }}/${{ env.DOCKER_REPO }}:${{ github.sha }} python -m pylint .
+        run: docker run --rm ${{ env.DOCKER_USERNAME }}/${{ env.DOCKER_REPO }}:${{ github.sha }} python -m pylint --persistent=n . .
       - name: Test
         run: docker run --rm ${{ env.DOCKER_USERNAME }}/${{ env.DOCKER_REPO }}:${{ github.sha }} python -m pytest tests
       - name: Log in to Docker Hub
