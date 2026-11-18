@@ -36,3 +36,18 @@ def test_add_animal_missing_field(client):
                          "species": "Giraffa camelopardalis"}
     response = client.post('/api/animals', json=incomplete_animal)
     assert response.status_code == 400
+
+def test_get_animals_can_filter_by_habitat(client):
+    response = client.get('/api/animals?habitat=savannah')
+
+    assert response.status_code == 200
+    data = response.get_json()
+    assert len(data) == 2
+    assert all(animal["habitat"] == "Savannah" for animal in data)
+
+
+def test_get_animals_returns_empty_list_for_unknown_habitat(client):
+    response = client.get('/api/animals?habitat=Ocean')
+
+    assert response.status_code == 200
+    assert response.get_json() == []
